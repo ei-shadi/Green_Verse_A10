@@ -1,0 +1,55 @@
+.squeeze-button {
+  height: 2.3em;
+  width: 6em;
+  background: orange;
+  border-radius: 10px;
+  outline: none;
+  color: #ffffff;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 900;
+  cursor: pointer;
+  animation: jello-horizontal 0.9s both;
+  transition: all 0.3s ease-in-out;
+}
+
+.squeeze-button:hover {
+  font-weight: 900;
+  font-size: larger;
+  width: 8em;
+  font-style: normal;
+  background: #588157;
+  border-radius: 50px;
+  color: #ffffff;
+  animation: squeeze3124 0.9s both;
+}
+
+@keyframes squeeze3124 {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
