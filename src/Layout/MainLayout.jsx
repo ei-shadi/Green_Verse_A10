@@ -10,11 +10,11 @@ const MainLayout = () => {
         <Navbar />
       </header>
 
-      <main className='w-11/12 mx-auto'>
+      <main className='w-11/12 mx-auto min-h-screen'>
         <Outlet />
       </main>
 
-      <footer>
+      <footer className='bg-[#3a5a40]'>
         <Footer />
       </footer>
 

@@ -32,8 +32,8 @@ const Navbar = () => {
           <Link
             to="/"
             className="flex italic items-center gap-2">
-            <img className="h-15 w-15 md:h-18 md:w-18" src={logo} alt="Logo" />
-            <h1 className="text-xl md:text-3xl ">Green Verse</h1>
+            <img className="h-15 w-15" src={logo} alt="Logo" />
+            <h1 className="text-2xl md:text-3xl whitespace-nowrap bg-gradient-to-r from-amber-600 to-[#344e41] bg-clip-text text-transparent">Green Verse</h1>
           </Link>
         </div>
 
