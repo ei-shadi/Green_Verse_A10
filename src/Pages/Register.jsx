@@ -1,10 +1,23 @@
+import { useContext } from 'react';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router';
+import { AuthContext } from '../Provider/AuthProvider';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../Firebase/Firebase.config';
+
+
+
+
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const providerGoogle = new GoogleAuthProvider()
+  const { setUser, createUser } = useContext(AuthContext)
+
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -13,8 +26,76 @@ const Register = () => {
     const userData = Object.fromEntries(formData);
     const { name, email, photoUrl, password, confirmPassword } = userData;
 
+
+    // Password Matching
+    if (password !== confirmPassword) {
+      toast.error('Password does not match!')
+    }
+
+    // Validation of Password
+    if (!password == /[A-Z]/.test(password))
+      return toast.error("Password must contain at least 1 Uppercase letter.");
+    if (!password == /[a-z]/.test(password))
+      return toast.error("Password must contain at least 1 Lowercase letter.");
+    if (!password == /[0-9]/.test(password))
+      return toast.error("Password must contain at least 1 Number.");
+    if (!password == /[!@#$%^&*(),.?":{}|<>]/.test(password))
+      return toast.error("Password must contain at least 1 Special Character.");
+    if (!password == password.length >= 8)
+      return toast.error("Password must be at least 6 characters long.");
+
+
+
+    // Create User
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        Swal.fire({
+          icon: 'success',
+          title: 'Account created successfully!',
+          html: `<span class="font-bold text-green-500 text-2xl">Welcome <span class="text-amber-600 font-bold text-2xl">${name}</span></span>`,
+          showConfirmButton: true,
+          confirmButtonText: 'Continue',
+          timer: 3000,
+          timerProgressBar: true,
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+
   };
 
+  // Login With Google
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, providerGoogle)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        setUser(user)
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged in successfully with Google!',
+          html: `<span class="font-bold text-green-500 text-2xl">Welcome <span class="text-amber-600 font-bold text-2xl">${user.displayName}</span></span>`,
+          showConfirmButton: true,
+          confirmButtonText: 'Continue',
+          timer: 3000,
+          timerProgressBar: true,
+        });
+
+
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  }
 
 
 
@@ -99,7 +180,7 @@ const Register = () => {
           <div className="mt-6">
             <button
               type="submit"
-              className="w-full bg-white text-black font-semibold py-2 rounded-full hover:bg-gray-200 transition"
+              className="w-full bg-white text-black font-semibold py-2 rounded-full hover:bg-amber-600 hover:scale-110 duration-300 cursor-pointer hover:text-white transition"
             >
               Register
             </button>
@@ -109,16 +190,21 @@ const Register = () => {
           {/* Google and Github */}
           <div className="flex items-center justify-center my-5">
             <div className="border-t border-gray-600 w-full"></div>
-            <span className="px-3 text-gray-400">OR</span>
+            <span className="px-3 text-white">OR</span>
             <div className="border-t border-gray-600 w-full"></div>
           </div>
 
-          <button className="flex items-center justify-center gap-2 w-full bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded mb-3">
+          <button
+            onClick={handleGoogleLogin}
+            type="button"
+            className="flex items-center justify-center gap-2 w-full bg-gray-800 hover:bg-amber-600 hover:scale-110 duration-300 transform hover:rounded-full cursor-pointer text-white py-2 px-4 rounded mb-3">
             <FaGoogle />
             Login with Google
           </button>
 
-          <button className="flex items-center justify-center gap-2 w-full bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded mb-5">
+          <button 
+          type='button' 
+          className="flex items-center justify-center gap-2 w-full bg-gray-800 hover:bg-amber-600 hover:scale-110 hover:rounded-full cursor-pointer text-white py-2 px-4 rounded mb-5">
             <FaGithub />
             Login with GitHub
           </button>

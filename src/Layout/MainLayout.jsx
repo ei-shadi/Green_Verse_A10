@@ -7,7 +7,7 @@ const MainLayout = () => {
   return (
     <div className='bg-[#a3b18a]'>
 
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
 
       <header>
         <Navbar />

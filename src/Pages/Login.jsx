@@ -78,7 +78,7 @@ const Login = () => {
         {/* Google and Github */}
         <div className="flex items-center justify-center mb-5">
           <div className="border-t border-gray-600 w-full"></div>
-          <span className="px-3 text-gray-400">OR</span>
+          <span className="px-3 text-white">OR</span>
           <div className="border-t border-gray-600 w-full"></div>
         </div>
 
