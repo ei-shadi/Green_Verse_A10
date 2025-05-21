@@ -1,16 +1,19 @@
 import { Outlet } from 'react-router';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import ScrollToTop from '../Utilities/ScrollToTop';
 
 const MainLayout = () => {
   return (
     <div className='bg-[#a3b18a]'>
 
-      <header className=''>
+      {/* <ScrollToTop /> */}
+
+      <header>
         <Navbar />
       </header>
 
-      <main className='w-11/12 mx-auto min-h-screen'>
+      <main className='w-11/12 mx-auto min-h-[calc(100vh-353px)]'>
         <Outlet />
       </main>
 

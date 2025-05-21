@@ -33,7 +33,7 @@ const Navbar = () => {
             to="/"
             className="flex italic items-center gap-2">
             <img className="h-15 w-15" src={logo} alt="Logo" />
-            <h1 className="text-2xl md:text-3xl whitespace-nowrap bg-gradient-to-r from-amber-600 to-[#344e41] bg-clip-text text-transparent">Green Verse</h1>
+            <h1 className="text-2xl md:text-3xl whitespace-nowrap bg-gradient-to-b from-amber-600 to-[#588157] bg-clip-text text-transparent">Green Verse</h1>
           </Link>
         </div>
 
@@ -162,13 +162,33 @@ const Navbar = () => {
 
           {/* Buttons */}
           <div className="lg:flex gap-5 hidden items-center">
-            <div className="avatar w-16 h-16 ">
-                <img
-                className="rounded-full"
-                src="https://img.daisyui.com/images/profile/demo/batperson@192.webp" />
+
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                </div>
+
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 shadow ">
+                <Button label="Logout" />
+
+              </ul>
             </div>
-            <Button label="Login" />
-            <Button label="Register" />
+
+            <Link
+              to="/auth/login">
+              <Button label="Login" />
+            </Link>
+
+            <Link
+              to="/auth/register">
+              <Button label="Register" />
+            </Link>
           </div>
         </div>
       </div>
