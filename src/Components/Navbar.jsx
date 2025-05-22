@@ -183,12 +183,11 @@ const Navbar = () => {
 
 
                   {
-                    user ? <div>
+                    user ? <div className="flex flex-col gap-2">
                       {/*  Logout */}
                       <NavLink
-                        to="/"
                         onClick={handleLogout}
-                        className={({ isActive }) => (isActive ? "text-xl font-extrabold text-white  rounded-full py-1 bg-amber-600 "
+                        className={({ isActive }) => (isActive ? "italic font-semibold bg-[#588157] rounded-2xl text-lg py-1 text-white"
                           :
                           "italic font-semibold bg-[#588157] rounded-2xl text-lg py-1 text-white")}
                       >

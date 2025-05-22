@@ -10,7 +10,7 @@ import Register from "../Pages/Register";
 import AuthLayout from "../Layout/AuthLayout";
 import PrivateRoute from "../Provider/PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage";
-
+import Loader from "../Utilities/Loader";
 
 
 
@@ -20,6 +20,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
+    hydrateFallbackElement: <Loader />,
     children: [
       {
         index: true,
