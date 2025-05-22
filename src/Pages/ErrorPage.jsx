@@ -4,6 +4,7 @@ import { GiPlantRoots } from "react-icons/gi";
 import gsap from "gsap";
 import logo from "../assets/logo.png";
 import Button from "../Utilities/Button";
+import { Helmet } from "react-helmet-async";
 
 
 const ErrorPage = () => {
@@ -42,6 +43,8 @@ const ErrorPage = () => {
   }, []);
 
   return (
+    <>
+    <Helmet title="404 NOT FOUND - Green_Verse" />
     <div
       ref={containerRef}
       className="min-h-screen bg-gradient-to-b from-[#a3b18a] to-[#3a5a40] flex flex-col items-center justify-center text-white p-6 text-center"
@@ -69,6 +72,7 @@ const ErrorPage = () => {
         <Button label="Go Home" />
       </Link>
     </div>
+    </>
   );
 };
 

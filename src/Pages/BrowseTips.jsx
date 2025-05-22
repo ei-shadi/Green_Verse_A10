@@ -1,9 +1,11 @@
+import { Helmet } from "react-helmet-async";
 
 const BrowseTips = () => {
   return (
-    <div>
+    <>
+      <Helmet title="Browse Tips - Green_Verse" />
       this is browse tips
-    </div>
+    </>
   );
 };
 

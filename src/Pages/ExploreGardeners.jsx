@@ -1,10 +1,12 @@
+import { Helmet } from "react-helmet-async";
 
 
 const ExploreGardeners = () => {
   return (
-    <div>
+    <>
+      <Helmet title="Explore Gardeners - Green_Verse" />
       this is explore gardeners
-    </div>
+    </>
   );
 };
 

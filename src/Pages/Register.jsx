@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../Firebase/Firebase.config';
+import { Helmet } from 'react-helmet-async';
 
 
 
@@ -135,6 +136,8 @@ const Register = () => {
   
 
   return (
+    <>
+    <Helmet title="Register - Green_Verse" />
     <div className="flex items-center justify-center w-11/12 mx-auto min-h-screen">
       <div className="bg-gradient-to-t from-[#a3b18a] to-[#3a5a40] text-white p-8 rounded-xl shadow-2xl w-full max-w-xl">
         <h2 className="text-2xl md:text-4xl text-center mb-6">Create Your Account</h2>
@@ -251,6 +254,7 @@ const Register = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.config";
+import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
@@ -117,6 +118,8 @@ const Login = () => {
 
 
   return (
+    <>
+    <Helmet title="Login - Green_Verse" />
     <div className="min-h-[calc(100vh-76px)] flex items-center justify-center w-11/12 mx-auto">
       <div className="bg-gradient-to-t from-[#a3b18a] to-[#3a5a40] text-white p-8 rounded-xl shadow-2xl w-full max-w-lg">
         <h2 className="text-2xl md:text-4xl text-center mb-6 ">Welcome Back!</h2>
@@ -195,6 +198,7 @@ const Login = () => {
 
       </div>
     </div>
+    </>
   );
 };
 

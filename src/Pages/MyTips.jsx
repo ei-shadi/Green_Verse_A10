@@ -1,9 +1,11 @@
+import { Helmet } from "react-helmet-async";
 
 const MyTips = () => {
   return (
-    <div>
+    <>
+    <Helmet title="My Tips - Green_Verse" />
       this is my tips
-    </div>
+    </>
   );
 };
 
