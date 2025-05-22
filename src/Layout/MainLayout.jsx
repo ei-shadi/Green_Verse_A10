@@ -13,7 +13,7 @@ const MainLayout = () => {
         <Navbar />
       </header>
 
-      <main className='w-11/12 mx-auto min-h-[calc(100vh-353px)]'>
+      <main className='min-h-screen'>
         <Outlet />
       </main>
 
