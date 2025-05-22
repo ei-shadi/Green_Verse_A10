@@ -1,16 +1,41 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import logo from '../assets/logo.png'
 import { RiMenuFoldLine } from "react-icons/ri";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Button from "../Utilities/Button";
-
-
+import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+import { Tooltip } from "react-tooltip";
+import { Helmet } from "react-helmet-async";
 
 
 const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef();
+  const { user, logOutUser } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logOutUser()
+      .then(() => {
+        setIsOpen(!isOpen)
+        Swal.fire({
+          icon: 'success',
+          title: 'Logout successfully! ',
+          showConfirmButton: true,
+          confirmButtonText: 'Continue',
+          timer: 2000,
+          timerProgressBar: true,
+        });
+        navigate('/')
+
+      })
+      .catch((error) => {
+        toast.error(error.message)
+      });
+  }
 
   // Optional: Close menu when clicking outside
   useEffect(() => {
@@ -22,6 +47,7 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
 
 
   return (
@@ -155,6 +181,44 @@ const Navbar = () => {
                     My Tips
                   </NavLink>
 
+
+                  {
+                    user ? <div>
+                      {/*  Logout */}
+                      <NavLink
+                        to="/"
+                        onClick={handleLogout}
+                        className={({ isActive }) => (isActive ? "text-xl font-extrabold text-white  rounded-full py-1 bg-amber-600 "
+                          :
+                          "italic font-semibold bg-[#588157] rounded-2xl text-lg py-1 text-white")}
+                      >
+                        Logout
+                      </NavLink>
+                    </div>
+                      : <div className="flex flex-col gap-2">
+                        {/*  Login */}
+                        <NavLink
+                          to="/auth/login"
+                          onClick={() => setIsOpen(!isOpen)}
+                          className={({ isActive }) => (isActive ? "text-xl font-extrabold text-white  rounded-full py-1 bg-amber-600 "
+                            :
+                            "italic font-semibold bg-[#588157] rounded-2xl text-lg py-1 text-white")}
+                        >
+                          Login
+                        </NavLink>
+
+                        {/*  Register */}
+                        <NavLink
+                          to="/auth/register"
+                          onClick={() => setIsOpen(!isOpen)}
+                          className={({ isActive }) => (isActive ? "text-xl font-extrabold text-white  rounded-full py-1 bg-amber-600 "
+                            :
+                            "italic font-semibold bg-[#588157] rounded-2xl text-lg py-1 text-white")}
+                        >
+                          Register
+                        </NavLink>
+                      </div>
+                  }
                 </div>
               </div>
             )}
@@ -163,33 +227,45 @@ const Navbar = () => {
           {/* Buttons */}
           <div className="lg:flex gap-5 hidden items-center">
 
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            {
+              user ? <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                  <div className="w-20 rounded-full">
+                    <img
+                      data-tooltip-id="my-tooltip-inline"
+                      data-tooltip-content={user?.displayName}
+                      alt="Tailwind CSS Navbar component"
+                      src={user ? user?.photoURL : logo} />
+
+                    <Tooltip
+                      id="my-tooltip-inline"
+                      style={{ backgroundColor: "#FFA500", color: "#ffffff", fontSize: "18px" }} />
+                  </div>
                 </div>
-
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 shadow ">
+                  <Button label="Logout" onClick={handleLogout} />
+                </ul>
               </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 shadow ">
-                <Button label="Logout" />
+                :
+                <div className="flex gap-5">
+                  <Link
+                    to="/auth/login">
+                    <Button label="Login" />
+                  </Link>
 
-              </ul>
-            </div>
+                  <Link
+                    to="/auth/register">
+                    <Button label="Register" />
+                  </Link>
+                </div>
+            }
 
-            <Link
-              to="/auth/login">
-              <Button label="Login" />
-            </Link>
 
-            <Link
-              to="/auth/register">
-              <Button label="Register" />
-            </Link>
+
           </div>
+
         </div>
       </div>
     </div>

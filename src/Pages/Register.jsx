@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../Firebase/Firebase.config';
 
 
@@ -16,15 +16,16 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const providerGoogle = new GoogleAuthProvider()
+  const providerGithub = new GithubAuthProvider()
   const { setUser, createUser } = useContext(AuthContext)
-
+  const navigate = useNavigate()
 
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const userData = Object.fromEntries(formData);
-    const { name, email, photoUrl, password, confirmPassword } = userData;
+    const { name, email, password, confirmPassword } = userData;
 
 
     // Password Matching
@@ -42,7 +43,7 @@ const Register = () => {
     if (!password == /[!@#$%^&*(),.?":{}|<>]/.test(password))
       return toast.error("Password must contain at least 1 Special Character.");
     if (!password == password.length >= 8)
-      return toast.error("Password must be at least 6 characters long.");
+      return toast.error("Password must be at least 8 characters long.");
 
 
 
@@ -50,15 +51,17 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+        setUser(user)
         Swal.fire({
           icon: 'success',
           title: 'Account created successfully!',
           html: `<span class="font-bold text-green-500 text-2xl">Welcome <span class="text-amber-600 font-bold text-2xl">${name}</span></span>`,
           showConfirmButton: true,
           confirmButtonText: 'Continue',
-          timer: 3000,
+          timer: 2000,
           timerProgressBar: true,
         });
+        navigate(`${location.state ? location.state : '/'}`);
       })
       .catch((error) => {
         console.log(error.message);
@@ -82,11 +85,10 @@ const Register = () => {
           html: `<span class="font-bold text-green-500 text-2xl">Welcome <span class="text-amber-600 font-bold text-2xl">${user.displayName}</span></span>`,
           showConfirmButton: true,
           confirmButtonText: 'Continue',
-          timer: 3000,
+          timer: 2000,
           timerProgressBar: true,
         });
-
-
+        navigate(`${location.state ? location.state : '/'}`);
       }).catch((error) => {
         // Handle Errors here.
         const errorMessage = error.message;
@@ -97,7 +99,40 @@ const Register = () => {
       });
   }
 
+  // Login With GitHub
+  const handleGithubLogin = () => {
+    signInWithPopup(auth, providerGithub)
+      .then((result) => {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+        const credential = GithubAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
 
+        // The signed-in user info.
+        const user = result.user;
+        setUser(user)
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged in successfully with GitHub!',
+          html: `<span class="font-bold text-green-500 text-2xl">Welcome <span class="text-amber-600 font-bold text-2xl">${user.displayName}</span></span>`,
+          showConfirmButton: true,
+          confirmButtonText: 'Continue',
+          timer: 2000,
+          timerProgressBar: true,
+        });
+        navigate(`${location.state ? location.state : '/'}`);
+        // IdP data available using getAdditionalUserInfo(result)
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GithubAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
+
+  
 
   return (
     <div className="flex items-center justify-center w-11/12 mx-auto min-h-screen">
@@ -124,6 +159,7 @@ const Register = () => {
               name="email"
               placeholder="leroy@jenkins.com"
               className="w-full h-12 p-2 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
             />
           </div>
 
@@ -134,6 +170,7 @@ const Register = () => {
               name="photoUrl"
               placeholder="//https://img-link"
               className="w-full h-12 p-2 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
             />
           </div>
 
@@ -144,6 +181,7 @@ const Register = () => {
               name="password"
               placeholder="*****"
               className="w-full h-12 p-2 rounded bg-gray-800 text-white pr-10 focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
             />
             <button
               type="button"
@@ -161,6 +199,7 @@ const Register = () => {
               name="confirmPassword"
               placeholder="*****"
               className="w-full h-12 p-2 rounded bg-gray-800 text-white pr-10 focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
             />
             <button
               type="button"
@@ -180,7 +219,7 @@ const Register = () => {
           <div className="mt-6">
             <button
               type="submit"
-              className="w-full bg-white text-black font-semibold py-2 rounded-full hover:bg-amber-600 hover:scale-110 duration-300 cursor-pointer hover:text-white transition"
+              className="w-full bg-white text-black font-semibold py-2 rounded-full hover:bg-amber-600 hover:scale-105 duration-300 cursor-pointer hover:text-white transition"
             >
               Register
             </button>
@@ -197,14 +236,15 @@ const Register = () => {
           <button
             onClick={handleGoogleLogin}
             type="button"
-            className="flex items-center justify-center gap-2 w-full bg-gray-800 hover:bg-amber-600 hover:scale-110 duration-300 transform hover:rounded-full cursor-pointer text-white py-2 px-4 rounded mb-3">
+            className="flex items-center justify-center gap-2 w-full bg-gray-800 hover:bg-amber-600 hover:scale-105 duration-300 transform cursor-pointer text-white py-2 px-4 rounded mb-3">
             <FaGoogle />
             Login with Google
           </button>
 
-          <button 
-          type='button' 
-          className="flex items-center justify-center gap-2 w-full bg-gray-800 hover:bg-amber-600 hover:scale-110 hover:rounded-full cursor-pointer text-white py-2 px-4 rounded mb-5">
+          <button
+            onClick={handleGithubLogin}
+            type='button'
+            className="flex items-center justify-center gap-2 w-full bg-gray-800 hover:bg-amber-600 hover:scale-105 duration-300 transform cursor-pointer text-white py-2 px-4 rounded mb-5">
             <FaGithub />
             Login with GitHub
           </button>
