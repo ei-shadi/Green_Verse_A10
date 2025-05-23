@@ -229,16 +229,18 @@ const Navbar = () => {
             {
               user ? <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                  <div className="w-20 rounded-full">
+                  <div className="h-12 rounded-full">
                     <img
                       data-tooltip-id="my-tooltip-inline"
                       data-tooltip-content={user?.displayName}
                       alt="Tailwind CSS Navbar component"
-                      src={user ? user?.photoURL : logo} />
+                      src={user ? user?.photoURL : logo}
+                      className="object-cover "
+                      />
 
                     <Tooltip
                       id="my-tooltip-inline"
-                      style={{ backgroundColor: "#FFA500", color: "#ffffff", fontSize: "18px" }} />
+                      style={{ backgroundColor: "#588157", color: "#ffffff", fontSize: "20px", fontWeight: "bold", padding: "10px", zIndex: "9999" }} />
                   </div>
                 </div>
                 <ul

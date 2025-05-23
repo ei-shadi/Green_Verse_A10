@@ -3,6 +3,7 @@ import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import Button from '../Utilities/Button';
 
 const events = [
   {
@@ -43,14 +44,14 @@ const Slider = () => {
       {events.map(event => (
         <SwiperSlide key={event.id}>
           <div
-            className="h-screen w-full bg-cover bg-center relative flex items-center justify-center transition-opacity duration-1000"
+            className="h-[600px] w-full bg-cover bg-center relative flex items-center justify-center transition-opacity duration-1000"
             style={{ backgroundImage: `url(${event.imageUrl})` }}
           >
             <div className="absolute inset-0 bg-black/60"></div>
             <div className="relative z-10 text-center text-white px-6 max-w-xl">
               <h2 className="text-3xl md:text-4xl font-bold mb-3">{event.title}</h2>
               <p className="mb-4 text-lg">{event.description}</p>
-              <button className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-md transition duration-300">
+              <button className="bg-green-600 hover:bg-amber-600 text-white px-5 py-2 rounded-md transition duration-300 hover:cursor-pointer hover:scale-125">
                 {event.buttonText}
               </button>
             </div>

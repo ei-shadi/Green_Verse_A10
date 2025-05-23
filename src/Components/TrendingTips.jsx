@@ -23,7 +23,7 @@ const getIcon = (id) => {
 
 const TrendingTips = ({ tip }) => {
   return (
-    <div className="bg-gradient-to-b from-[#a3b18a] to-[#3a5a40] rounded-2xl shadow-md hover:shadow-lg transition-transform transform hover:scale-110 hover:cursor-pointer p-5 w-full hover:bg-gradient-to-b hover:from-[#a3b18a] hover:to-[#d38e0e]">
+    <div className="bg-gradient-to-b from-[#a3b18a] to-[#3a5a40] rounded-2xl shadow-2xl transition-transform transform hover:scale-110 hover:cursor-pointer p-5 w-full hover:bg-gradient-to-b hover:from-[#a3b18a] hover:to-[#d38e0e]">
       <div className="flex justify-center mb-4 bg-white rounded-full w-16 h-16 mx-auto p-3">{getIcon(tip.id)}</div>
       <h3 className="text-xl md:text-2xl font-semibold text-white text-center">{tip.title}</h3>
       <p className="text-gray-200 mt-2 text-sm md:text-lg text-center">{tip.description}</p>
