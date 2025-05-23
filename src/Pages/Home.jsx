@@ -5,23 +5,31 @@ import FeaturedGardeners from "../Components/FeaturedGardeners";
 import { useEffect, useState } from "react";
 import TrendingTips from "../Components/TrendingTips";
 import UpcomingEvents from "../Components/UpcomingEvents";
-
-
+import FrequentlyAskedQ from "../Components/FrequentlyAskedQ";
+import ScrollToTop from "../Utilities/ScrollToTop";
 
 
 const Home = () => {
   const [tips, setTips] = useState([]);
+  const [faq, setFaq] = useState([]);
 
   // Gardeners Data
   const gardeners = useLoaderData();
 
-  // Trending Tips Data
+  // Data Fetching
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Top Trending Tips Fetch Data
         const tipsResponse = await fetch('http://localhost:3000/trending-tips');
         const tipsData = await tipsResponse.json();
         setTips(tipsData);
+
+        // FAQ Fetch Data
+        const faqResponse = await fetch('http://localhost:3000/faq');
+        const faqData = await faqResponse.json();
+        setFaq(faqData);
+
       } catch (error) {
         console.error("Error fetching data:", error);
 
@@ -37,7 +45,7 @@ const Home = () => {
   return (
     <>
       <Helmet title="Home - Green_Verse" />
-
+      <ScrollToTop />
       {/* Slider */}
       <section>
         <Slider />
@@ -56,14 +64,13 @@ const Home = () => {
 
       {/* Upcoming Gardening Events */}
       <section className="my-20 w-10/12 mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center bg-gradient-to-b from-amber-600 to-[#588157] bg-clip-text text-transparent"><span className="text-green-600 inline md:hidden">🌿</span>Upcoming Gardening Event"s<span className="text-green-600">🌿</span></h2>
-
+        <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center bg-gradient-to-b from-amber-600 to-[#588157] bg-clip-text text-transparent"><span className="text-green-600">🌿</span>Upcoming Gardening Event"s<span className="text-green-600 inline md:hidden">🌿</span></h2>
         <UpcomingEvents />
       </section>
 
       {/* Top Trending Section */}
       <section className="my-20 w-11/12 mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center bg-gradient-to-b from-amber-600 to-[#588157] bg-clip-text text-transparent"><span className="text-green-600">🌿</span>Top Trending Tips<span className="text-green-600 inline md:hidden">🌿</span></h2>
+        <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center bg-gradient-to-b from-amber-600 to-[#588157] bg-clip-text text-transparent"><span className="text-green-600 inline md:hidden">🌿</span>Top Trending Tips<span className="text-green-600">🌿</span></h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-11/12 mx-auto">
           {
             tips.map(tip => <TrendingTips key={tip.id} tip={tip} />)
@@ -71,10 +78,11 @@ const Home = () => {
         </div>
       </section>
 
-
-
-
-
+      {/* Frequently Asked Questions */}
+      <section className="my-20 w-11/12 mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold mb-20 text-center bg-gradient-to-b from-amber-600 to-[#588157] bg-clip-text text-transparent"><span className="text-green-600">🌿</span>Frequently Asked Question<span className="text-green-600 inline md:hidden">🌿</span></h2>
+        <FrequentlyAskedQ faq={faq} />
+      </section>
     </>
   );
 };
