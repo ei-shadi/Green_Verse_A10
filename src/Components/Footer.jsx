@@ -15,7 +15,7 @@ const Footer = () => {
 							<img src={logo} alt="" />
 
 						</div>
-						<h1 className="self-center text-3xl md:text-3xl italic">Green Verse</h1>
+						<h1 className="self-center text-3xl md:text-3xl italic bg-gradient-to-b from-amber-600 to-[#588157] bg-clip-text text-transparent">Green Verse</h1>
 					</Link>
 				</div>
 				<div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4 text-center md:text-left">

@@ -5,7 +5,7 @@ import ScrollToTop from '../Utilities/ScrollToTop';
 
 const MainLayout = () => {
   return (
-    <div className='bg-[#a3b18a]'>
+    <div>
 
       <ScrollToTop />
 
