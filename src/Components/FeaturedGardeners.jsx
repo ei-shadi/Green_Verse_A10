@@ -1,6 +1,5 @@
 
 const FeaturedGardeners = ({ gardener }) => {
-  console.log(gardener);
 
   const { name, location, bio, image, status } = gardener;
 
