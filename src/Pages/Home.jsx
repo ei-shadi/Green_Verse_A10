@@ -7,6 +7,7 @@ import TrendingTips from "../Components/TrendingTips";
 import UpcomingEvents from "../Components/UpcomingEvents";
 import FrequentlyAskedQ from "../Components/FrequentlyAskedQ";
 import ScrollToTop from "../Utilities/ScrollToTop";
+import { Tooltip } from "react-tooltip";
 
 
 const Home = () => {
@@ -45,6 +46,9 @@ const Home = () => {
   return (
     <>
       <Helmet title="Home - Green_Verse" />
+      <Tooltip
+        id="my-tooltip-inline"
+        style={{ backgroundColor: "#588157", color: "#ffffff", fontSize: "20px", fontWeight: "bold", padding: "10px", zIndex: "999999" }} />
       <ScrollToTop />
       {/* Slider */}
       <section>

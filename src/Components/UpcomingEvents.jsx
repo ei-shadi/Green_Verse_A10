@@ -81,7 +81,7 @@ const UpcomingEvents = () => {
                   <img
                     src={event.image}
                     alt={event.title}
-                    className="lg:h-[500px] w-[2000px] object-cover rounded-lg h-[300px]"
+                    className="lg:h-[500px] w-[2000px] object- rounded-lg h-[300px]"
                   />
                 </div>
                 <div className="text-center w-full my-10 rounded-xl relative">

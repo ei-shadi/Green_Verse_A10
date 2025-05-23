@@ -3,7 +3,6 @@ import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
-import Button from '../Utilities/Button';
 
 const events = [
   {
@@ -34,7 +33,7 @@ const Slider = () => {
     <Swiper
       modules={[Pagination, Autoplay, EffectFade]}
       pagination={{ clickable: true }}
-      autoplay={{ delay: 3000, disableOnInteraction: false }}
+      autoplay={{ delay: 2000, disableOnInteraction: false }}
       effect="fade"
       loop={true}
       spaceBetween={0}
@@ -44,7 +43,7 @@ const Slider = () => {
       {events.map(event => (
         <SwiperSlide key={event.id}>
           <div
-            className="h-[600px] w-full bg-cover bg-center relative flex items-center justify-center transition-opacity duration-1000"
+            className="h-[650px] w-full bg-cover bg-center relative flex items-center justify-center transition-opacity duration-1000"
             style={{ backgroundImage: `url(${event.imageUrl})` }}
           >
             <div className="absolute inset-0 bg-black/60"></div>
