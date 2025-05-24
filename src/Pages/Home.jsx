@@ -11,16 +11,19 @@ import { Tooltip } from "react-tooltip";
 
 
 const Home = () => {
+  const [gardeners, setGardeners] = useState([]);
   const [tips, setTips] = useState([]);
   const [faq, setFaq] = useState([]);
-
-  // Gardeners Data
-  const gardeners = useLoaderData();
 
   // Data Fetching
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Gardeners Data Fetch
+        const gardenersResponse = await fetch('http://localhost:3000/gardeners/featured-gardeners');
+        const gardenersData = await gardenersResponse.json();
+        setGardeners(gardenersData);
+
         // Top Trending Tips Fetch Data
         const tipsResponse = await fetch('http://localhost:3000/trending-tips');
         const tipsData = await tipsResponse.json();
@@ -33,10 +36,8 @@ const Home = () => {
 
       } catch (error) {
         console.error("Error fetching data:", error);
-
       }
     }
-
     fetchData();
   }, []);
 
