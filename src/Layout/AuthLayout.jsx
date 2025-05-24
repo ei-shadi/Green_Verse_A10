@@ -6,7 +6,7 @@ import Footer from "../Components/Footer";
 const AuthLayout = () => {
   return (
     <div>
-      <header>
+      <header className="h-[96px]">
         <Navbar />
       </header>
 

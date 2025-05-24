@@ -1,10 +1,13 @@
 import { Helmet } from "react-helmet-async";
+import ShareGardenTipForm from "../Components/ShareGardenForm";
 
 const ShareGardenTip = () => {
   return (
     <>
       <Helmet title="Share Garden Tip - Green_Verse" />
-      this is share garden tip
+      <div className="w-11/12 mx-auto">
+      <ShareGardenTipForm />
+      </div>
     </>
   );
 };
