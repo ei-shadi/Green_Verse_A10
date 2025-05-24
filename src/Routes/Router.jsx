@@ -11,6 +11,7 @@ import AuthLayout from "../Layout/AuthLayout";
 import PrivateRoute from "../Provider/PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage";
 import Loader from "../Utilities/Loader";
+import TipsDetailPage from "../Components/TipsDetailPage";
 
 
 
@@ -45,6 +46,13 @@ const router = createBrowserRouter([
         path: "my-tips",
         element: <PrivateRoute>
           <MyTips />
+        </PrivateRoute>,
+      },
+      {
+        path: "tips-details/:id",
+        loader: ({ params }) => fetch(`http://localhost:3000/gardeners-tips/${params.id}`),
+        element: <PrivateRoute>
+          <TipsDetailPage />
         </PrivateRoute>,
       }
     ],
