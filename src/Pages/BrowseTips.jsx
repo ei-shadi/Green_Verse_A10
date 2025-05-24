@@ -25,7 +25,7 @@ const BrowseTips = () => {
     <>
       <Helmet title="Browse Tips - Green_Verse" />
       <div className="w-11/12 mx-auto">
-        <BrowseTipsCard  gardenersTips={gardenersTips}/>
+        <BrowseTipsCard gardenersTips={gardenersTips} />
       </div>
     </>
   );

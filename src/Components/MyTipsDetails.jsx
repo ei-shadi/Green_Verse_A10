@@ -72,8 +72,8 @@ const MyTipsDetails = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-4xl md:text-5xl font-bold my-10 text-center bg-gradient-to-b from-amber-600 to-[#588157] bg-clip-text text-transparent">
+    <div className="p-4 mb-20">
+      <h2 className="text-4xl md:text-5xl font-bold my-14 text-center bg-gradient-to-b from-amber-600 to-[#588157] bg-clip-text text-transparent">
         <span className="text-green-600 inline md:hidden">🌿</span>
         My Garden Tips
         <span className="text-green-600">🌿</span>
