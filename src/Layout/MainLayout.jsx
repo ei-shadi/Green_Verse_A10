@@ -9,7 +9,7 @@ const MainLayout = () => {
 
       <ScrollToTop />
 
-      <header className='h-[96px] bg-[#a3b18a]'>
+      <header className='h-[96px]'>
         <Navbar />
       </header>
 

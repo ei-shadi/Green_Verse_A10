@@ -10,7 +10,7 @@ const BrowseTips = () => {
     const fetchData = async () => {
       try {
         // Gardeners Tips Data Fetch
-        const gardenersResponse = await fetch('http://localhost:3000/gardeners-tips/public');
+        const gardenersResponse = await fetch('https://green-verse-server.vercel.app/gardeners-tips/public');
         const gardenersData = await gardenersResponse.json();
         setGardenersTips(gardenersData);
       } catch (error) {

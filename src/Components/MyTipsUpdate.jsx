@@ -33,7 +33,7 @@ const MyTipsUpdate = () => {
     
 
     try {
-      const response = await fetch(`http://localhost:3000/gardeners-tips/${tipsData._id}`, {
+      const response = await fetch(`https://green-verse-server.vercel.app/gardeners-tips/${tipsData._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

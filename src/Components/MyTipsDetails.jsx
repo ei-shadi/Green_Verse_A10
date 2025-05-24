@@ -10,7 +10,7 @@ const MyTipsDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const tipsResponse = await fetch('http://localhost:3000/gardeners-tips');
+        const tipsResponse = await fetch('https://green-verse-server.vercel.app/gardeners-tips');
         const tipsData = await tipsResponse.json();
         setGardenersTips(tipsData);
       } catch (error) {
@@ -36,7 +36,7 @@ const MyTipsDetails = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`http://localhost:3000/gardeners-tips/${id}`, {
+        const response = await fetch(`https://green-verse-server.vercel.app/gardeners-tips/${id}`, {
           method: "DELETE",
         });
         const data = await response.json();

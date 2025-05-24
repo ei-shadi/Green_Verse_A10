@@ -29,7 +29,7 @@ const ShareGardenTipForm = () => {
     tipData.userEmail = user.email;
 
     try {
-      const response = await fetch("http://localhost:3000/gardeners-tips", {
+      const response = await fetch("https://green-verse-server.vercel.app/gardeners-tips", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -20,17 +20,17 @@ const Home = () => {
     const fetchData = async () => {
       try {
         // Gardeners Data Fetch
-        const gardenersResponse = await fetch('http://localhost:3000/gardeners/featured-gardeners');
+        const gardenersResponse = await fetch('https://green-verse-server.vercel.app/gardeners/featured-gardeners');
         const gardenersData = await gardenersResponse.json();
         setGardeners(gardenersData);
 
         // Top Trending Tips Fetch Data
-        const tipsResponse = await fetch('http://localhost:3000/trending-tips');
+        const tipsResponse = await fetch('https://green-verse-server.vercel.app/trending-tips');
         const tipsData = await tipsResponse.json();
         setTips(tipsData);
 
         // FAQ Fetch Data
-        const faqResponse = await fetch('http://localhost:3000/faq');
+        const faqResponse = await fetch('https://green-verse-server.vercel.app/faq');
         const faqData = await faqResponse.json();
         setFaq(faqData);
 

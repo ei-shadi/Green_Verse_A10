@@ -9,7 +9,7 @@ const ExploreGardeners = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const gardenersResponse = await fetch("http://localhost:3000/gardeners");
+        const gardenersResponse = await fetch("https://green-verse-server.vercel.app/gardeners");
         const gardenersData = await gardenersResponse.json();
         setGardeners(gardenersData);
       } catch (error) {

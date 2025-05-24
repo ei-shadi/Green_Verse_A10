@@ -51,14 +51,14 @@ const router = createBrowserRouter([
       },
       {
         path: "tips-details/:id",
-        loader: ({ params }) => fetch(`http://localhost:3000/gardeners-tips/${params.id}`),
+        loader: ({ params }) => fetch(`https://green-verse-server.vercel.app/gardeners-tips/${params.id}`),
         element: <PrivateRoute>
           <TipsDetailPage />
         </PrivateRoute>,
       },
       {
         path: "update-tips/:id",
-        loader: ({ params }) => fetch(`http://localhost:3000/gardeners-tips/${params.id}`),
+        loader: ({ params }) => fetch(`https://green-verse-server.vercel.app/gardeners-tips/${params.id}`),
         element: <PrivateRoute>
           <MyTipsUpdate />
         </PrivateRoute>,
