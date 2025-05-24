@@ -12,6 +12,7 @@ import PrivateRoute from "../Provider/PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage";
 import Loader from "../Utilities/Loader";
 import TipsDetailPage from "../Components/TipsDetailPage";
+import MyTipsUpdate from "../Components/MyTipsUpdate";
 
 
 
@@ -53,6 +54,13 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:3000/gardeners-tips/${params.id}`),
         element: <PrivateRoute>
           <TipsDetailPage />
+        </PrivateRoute>,
+      },
+      {
+        path: "update-tips/:id",
+        loader: ({ params }) => fetch(`http://localhost:3000/gardeners-tips/${params.id}`),
+        element: <PrivateRoute>
+          <MyTipsUpdate />
         </PrivateRoute>,
       }
     ],

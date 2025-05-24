@@ -9,8 +9,8 @@ const TipsDetailPage = () => {
   const handleLike = () => setLiked(!liked);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-t from-[#a3b18a] to-[#3a5a40]">
-      <div className="max-w-sm bg-cyan-500 text-white rounded-2xl shadow-md overflow-hidden border border-gray-200 p-4 w-11/12">
+    <div className="min-h-screen flex bg-gradient-to-t from-amber-600 to-[#588157] items-center justify-center ">
+      <div className="max-w-sm bg-gradient-to-t from-[#a3b18a] to-[#3a5a40] text-white rounded-2xl shadow-md overflow-hidden border border-gray-200 p-4 w-11/12">
         <img
           src={data.image || "https://via.placeholder.com/400x200"}
           alt={data.title || "Gardening Tip"}
