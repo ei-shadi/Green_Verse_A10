@@ -1,7 +1,7 @@
 
 <div align="center">
   <h1>
-    <a href="https://eis-green-verse.netlify.app/" target="_blank" rel="noopener noreferrer">
+    <a href="https://green-verse.netlify.app/" target="_blank" rel="noopener noreferrer">
       🌿 Greeen Verse
     </a>
   </h1>
